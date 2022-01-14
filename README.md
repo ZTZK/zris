@@ -1,0 +1,2 @@
+# zris
+The package is aimed to parse the .ris file. The .ris format usually used to exchange publication citation information across multiple platforms and computer applications. The package provides basic functions to parse the file and find the value with the given key.  
