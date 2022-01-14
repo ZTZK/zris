@@ -36,3 +36,26 @@ func (r RisObject) Match(key string) ([]string, error) {
 	}
 	return result, nil
 }
+
+func (r RisObject) ConverDate() (string, string, string) {
+	var year, month, day string
+	date := r["PY"][0]
+	year = date[0:4]
+	if date[5] == '/' {
+		month = ""
+		if date[6] == '/' {
+			day = ""
+		} else {
+			day = date[6:8]
+		}
+	} else {
+		month = date[5:7]
+		if date[8] == '/' {
+			day = ""
+		} else {
+			day = date[8:10]
+		}
+	}
+	return year, month, day
+
+}
