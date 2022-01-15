@@ -38,11 +38,18 @@ func (r RisObject) Match(key string) []string {
 
 // abstract the year from the "PY" tag. An error will return if something wrong.
 func (r RisObject) ConvertDateYear() (string, error) {
+	var date string
 	_, check := r["PY"]
 	if !check {
-		return "", errors.New("the py tag is not found")
+		_, check = r["Y1"]
+		if !check {
+			return "", errors.New("the py tag is not found")
+		}
+		date = r["Y1"][0]
+
+	} else {
+		date = r["PY"][0]
 	}
-	date := r["PY"][0]
 	if len(date) < 4 {
 		return "", errors.New("error with the py tag")
 	}
@@ -51,11 +58,18 @@ func (r RisObject) ConvertDateYear() (string, error) {
 
 // abstract the month from the "PY" tag. An error will return if something wrong.
 func (r RisObject) ConvertDateMonth() (string, error) {
+	var date string
 	_, check := r["PY"]
 	if !check {
-		return "", errors.New("the py tag is not found")
+		_, check = r["Y1"]
+		if !check {
+			return "", errors.New("the py tag is not found")
+		}
+		date = r["Y1"][0]
+
+	} else {
+		date = r["PY"][0]
 	}
-	date := r["PY"][0]
 	if len(date) < 7 {
 		return "", errors.New("error with the py tag")
 	}
@@ -64,11 +78,19 @@ func (r RisObject) ConvertDateMonth() (string, error) {
 
 // abstract the day from the "PY" tag. An error will return if something wrong.
 func (r RisObject) ConvertDateDay() (string, error) {
+	var date string
 	_, check := r["PY"]
 	if !check {
-		return "", errors.New("the py tag is not found")
+		_, check = r["Y1"]
+		if !check {
+			return "", errors.New("the py tag is not found")
+		}
+		date = r["Y1"][0]
+
+	} else {
+		date = r["PY"][0]
 	}
-	date := r["PY"][0]
+
 	if len(date) < 10 {
 		return "", errors.New("error with the py tag")
 	}
