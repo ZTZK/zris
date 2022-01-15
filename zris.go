@@ -27,18 +27,22 @@ func Index(file io.Reader) (RisObject, error) {
 	return risdata, nil
 }
 
-// The method will find the value with the given key. If the value does not exist, an error will return.
-func (r RisObject) Match(key string) ([]string, error) {
+// The method will find the value with the given key. If the value does not exist, nil will return.
+func (r RisObject) Match(key string) []string {
 	result, exist := r[key]
 	if !exist {
-		error := errors.New("the key is not founded")
-		return nil, error
+		return nil
 	}
-	return result, nil
+	return result
 }
 
-func (r RisObject) ConverDate() (string, string, string) {
+// Convery "PY" tag into date with 3 return values year, month and day. If the tag is not found, an error will return.
+func (r RisObject) ConverDate() (string, string, string, error) {
 	var year, month, day string
+	_, check := r["PY"]
+	if !check {
+		return "", "", "", errors.New("date is not found")
+	}
 	date := r["PY"][0]
 	year = date[0:4]
 	if date[5] == '/' {
@@ -56,6 +60,6 @@ func (r RisObject) ConverDate() (string, string, string) {
 			day = date[8:10]
 		}
 	}
-	return year, month, day
+	return year, month, day, nil
 
 }
