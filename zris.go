@@ -37,7 +37,7 @@ func (r RisObject) Match(key string) []string {
 }
 
 // Convert "PY" tag into date with 3 return values year, month and day. If the tag is not found, an error will return.
-func (r RisObject) ConverDate() (string, string, string, error) {
+func (r RisObject) ConvertDate() (string, string, string, error) {
 	var year, month, day string
 	_, check := r["PY"]
 	if !check {
